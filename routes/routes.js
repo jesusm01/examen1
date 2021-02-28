@@ -4,11 +4,17 @@ import UserController from "../controller/userController.js";
 import RolesController from "../controller/rolesContoller.js";
 import JsonWebTokenManagement from "../middleware/JsonWebTokenManagement.js";
 
+import ToDoController from "../controller/toDoController.js";
+
+
 var router = express.Router();
 var indexControler = new IndexController();
 var userController = new UserController();
 var rolesController = new RolesController();
 var jsonwebtokenmanagement = new JsonWebTokenManagement();
+
+var toDoController = new ToDoController();
+
 /* GET home page. */
 /**
  * Endpoints de los usuarios
@@ -40,5 +46,13 @@ router.delete("/roles/:id", rolesController.deleteRol);
 /* 
 Implemente 
 */
+
+/*ToDo Routes*/
+
+router.get("/todo",toDoController.getTodo);
+router.post("/todo",toDoController.createToDo);
+router.delete("/todo/:id",toDoController.deleteToDo);
+router.put("/todo/:id",toDoController.updateTodo);
+router.patch("/todo/:id",toDoController.checkTask);
 
 export default router;

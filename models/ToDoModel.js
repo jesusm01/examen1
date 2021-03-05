@@ -39,7 +39,7 @@ class ToDoModel{
     ///Empezamos el CRUD
 
     ///CREATE
-    createToDo(name,description,date,hour,done){
+    async createToDo(name,description,date,hour,done){
         var task = {
             name,
             description,
@@ -63,7 +63,7 @@ class ToDoModel{
 
     ///DELETE
 
-    deleteToDo(id){
+    async deleteToDo(id){
         return new Promise ((resolve,reject)=>{
             this.mymodel.remove({_id:id}).then((err,docs)=>{
                 if (err){
@@ -78,7 +78,7 @@ class ToDoModel{
     }
 
     //UPDATE
-    updateToDo(id, TodoUpdate){
+    async updateToDo(id, TodoUpdate){
         return new Promise ((resolve,reject)=>{
             
             if(TodoUpdate.hour){
@@ -101,9 +101,9 @@ class ToDoModel{
     }
 
     //GET
-    getToDo(){
+    async getToDo(){
         return new Promise ((resolve,reject)=>{
-            this.mymodel.find({},(err,docs)=>{
+            this.mymodel.find({done:false},(err,docs)=>{
                 if(err){
                     console.log(err);
                     resolve(err);
@@ -115,7 +115,7 @@ class ToDoModel{
     }
     
     //CHECKED
-    checkTask(id){
+    async checkTask(id){
         return new Promise ((resolve,reject)=>{
             this.mymodel.update({_id:id},{$set: {done:true}},(err,docs)=>{
                 if(err){
